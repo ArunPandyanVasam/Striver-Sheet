@@ -3,6 +3,7 @@
 
 int main() {
     puts("\n");
+    //   we can perform operations on Arrays
     //  1D-Array
     int arr[5] = {1, 2, 3, 4, 5};
     printf("Array Value- %d", arr[2]);
