@@ -18,8 +18,13 @@ int main()
 {
     puts("\n");
 
-    int n = 5;
+    int n , m;
+    printf("Input the value of n and m(give space between each value using space/tab button): ");
+    scanf("%d %d", &n, &m);
+    puts(" ");
     printRectangularStarPattern(n);
+    puts(" ");
+    printRectangularStarPattern(m);
 
     puts("\n");
     return 0;
