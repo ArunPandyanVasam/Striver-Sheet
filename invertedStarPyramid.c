@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 
-void printStarPyramidPattern(int n)
+void printInvertedStarPyramidPattern(int n)
 {
 
     for (int i = n - 1; i >= 0; i--)
@@ -35,7 +35,7 @@ int main()
     printf("Input the value of n: ");
     scanf("%d", &n);
     puts(" ");
-    printStarPyramidPattern(n);
+    printInvertedStarPyramidPattern(n);
 
     puts("\n");
     return 0;
