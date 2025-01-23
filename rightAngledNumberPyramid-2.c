@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 
-void printRectangularStarPattern(int n)
+void printrightAngledNumberPyramid2Pattern(int n)
 {
 
     for (int i = 1; i <= n; i++)
@@ -22,9 +22,9 @@ int main()
     printf("Input the value of n and m(give space between each value using space/tab button): ");
     scanf("%d %d", &n, &m);
     puts(" ");
-    printRectangularStarPattern(n);
+    printrightAngledNumberPyramid2Pattern(n);
     puts(" ");
-    printRectangularStarPattern(m);
+    printrightAngledNumberPyramid2Pattern(m);
 
     puts("\n");
     return 0;
