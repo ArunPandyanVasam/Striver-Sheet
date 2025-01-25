@@ -51,10 +51,8 @@ void printSymmetricVoidPatternBottom(int n)
         {
             printf("*");
         }
-        if (spaces >= 0)
-        {
-            spaces -= 2;
-        }
+
+        spaces -= 2;
 
         puts(" ");
     }
