@@ -3,34 +3,16 @@
 
 void printAlphaTrianglePattern(int n)
 {
-    
+
+    char chEnd = 'A' + (n - 1);
     for (int i = 0; i < n; i++)
     {
-        
-        // space
-        for (int j = 0; j < n - i -1; j++)
-        {
-            printf("-");
-        }
-
         // Alphabet
-        char ch = 'A';
-        int breakPoint = (2*i+1)/2;
-        for (int j = 1; j <= (2*i)+1; j++)
+        for (char ch = 'A' + (n - i - 1); ch <= chEnd; ch++)
         {
             printf("%c", ch);
-            if (j <= breakPoint) {
-                ch++;
-            } else {
-                ch--;
-            }
         }
-        
-        // space
-        for (int j = 0; j < n - i -1; j++)
-        {
-            printf("-");
-        }
+
         puts(" ");
     }
 }
