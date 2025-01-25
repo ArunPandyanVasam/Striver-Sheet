@@ -3,9 +3,16 @@
 #define min(a, b) ((a) < (b) ? (a) : (b)) // macros new concept
 
 /*
+    //condition ? expression_if_true : expression_if_false;
+
+    s
     int a = 10, b = 20, c = 5;
     int min = (a < b) ? (a < c ? a : c) : (b < c ? b : c);
-    printf("Minimum value: %d\n", min);
+    printf("Minimum value: %d\n", min); // nested ternary operator
+
+    int min(int a, int b) {
+        return (a < b) ? a : b;
+    }
 */
 
 void printtheNumberPattern(int n)
