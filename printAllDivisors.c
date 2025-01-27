@@ -55,5 +55,9 @@ int main()
     printf("Divisors using O(sqrt(n)) method:\n");
     printAllDivisors2(n);
 
+    //  Pending (Brush Up Concepts.)
+    //  Sort the th unsorted divisors from printAllDivisors2
+    //  Allocate Dynamic memory to store them
+
     return 0;
 }
