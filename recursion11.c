@@ -19,6 +19,9 @@ void printReverseAnArray(int i, int arr[], int n)
     printReverseAnArray(i+1, arr, n);
 }
 
+
+// Try to do using with two pointer variables
+
 int main()
 {
     puts(" ");
