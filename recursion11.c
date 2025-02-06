@@ -20,7 +20,7 @@ void printReverseAnArray(int i, int arr[], int n)
 }
 
 
-// Try to do using with two pointer variables
+// Try to do using with two pointer variables [l, r]
 
 int main()
 {
