@@ -1,24 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool arrayCheckSorted(int arr[], int n)
+int arrayRemoveDuplicates(int arr[], int n)
 {
 
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] >= arr[i - 1])
-        {
-        }
-        else
-        {
-            return false;
-        }
-
-        /*if (arr[i] < arr[i-1]) {
-            return false;
-        }*/ 
-    }
-    return true;
 }
 
 int main(void)
@@ -44,14 +29,6 @@ int main(void)
         scanf("%d", &arr[i]);
     }
 
-    if (arrayCheckSorted(arr, n))
-    {
-        printf("True");
-    }
-    else
-    {
-        printf("False");
-    }
 
     printf("\n");
     return 0;
