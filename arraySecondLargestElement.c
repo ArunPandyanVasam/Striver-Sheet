@@ -24,7 +24,33 @@ int secondLargestElement(int arr[], int n)
         }
     }
 
-    return secondLargest == INT_MIN ? INT_MIN : secondLargest;
+    return secondLargest;
+}
+
+int secondSmallestElement(int arr[], int n)
+{
+    if (n < 2)
+    {
+        return INT_MAX;
+    }
+
+    int smallest = arr[0];
+    int secondSmallest = INT_MAX;
+
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] < smallest)
+        {
+            secondSmallest = smallest;
+            smallest = arr[i];
+        }
+        else if (arr[i] < secondSmallest && arr[i] != smallest)
+        {
+            secondSmallest = arr[i];
+        }
+    }
+
+    return secondSmallest;
 }
 
 int main(void)
@@ -51,11 +77,16 @@ int main(void)
     }
 
     int secondLargest = secondLargestElement(arr, n);
-
     if (secondLargest == INT_MIN)
         printf("No second largest element exists.\n");
     else
         printf("Second largest element in the Array: %d\n", secondLargest);
+
+    int secondSmallest = secondSmallestElement(arr, n);
+    if (secondSmallest == INT_MAX)
+        printf("No second smallest element exists.\n");
+    else
+        printf("Second smallest element in the Array: %d\n", secondSmallest);
 
     printf("\n");
     return 0;
