@@ -4,6 +4,11 @@ void leftRotateArrayByDPlacesUsingTemp(int arr[], int n, int k)
 {
 
     k = k % n;
+
+    if (k == 0) {
+        return;
+    }
+
     int temp[k];
     for (int i = 0; i < k; i++)
     {
@@ -21,11 +26,30 @@ void leftRotateArrayByDPlacesUsingTemp(int arr[], int n, int k)
     }
 }
 
-void leftRotateArrayByDPlacesUsingReversalAlgo(int arr[], int n, int k)
+void reverse(int arr[], int start, int end)
 {
 
-    
-    
+    while (start < end)
+    {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
+
+void leftRotateArrayByDPlacesUsingReversalAlgo(int arr[], int n, int k)
+{
+    k = k % n;
+
+    if (k == 0) {
+        return;
+    }
+
+    reverse(arr, 0, k - 1);
+    reverse(arr, k, n - 1);
+    reverse(arr, 0, n - 1);
 }
 
 int main(void)
@@ -42,13 +66,14 @@ int main(void)
         return 1;
     }
 
-    int arr[n];
+    int arr[n], originalArray[n];
 
     printf("\nInput the elements into the Array");
     for (int i = 0; i < n; i++)
     {
         printf("\nElement at index arr[%d]: ", i);
         scanf("%d", &arr[i]);
+        originalArray[i] = arr[i];
     }
 
     int k = 0;
@@ -56,8 +81,21 @@ int main(void)
     scanf("%d", &k);
 
     leftRotateArrayByDPlacesUsingTemp(arr, n, k);
+    printf("\nRotated array using Temporary Array method: ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
 
-    printf("\nPrint the rotated array: ");
+
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = originalArray[i];
+    }
+    
+
+    leftRotateArrayByDPlacesUsingReversalAlgo(arr, n, k);
+    printf("\nRotated array using Reversal Algorithm: ");
     for (int i = 0; i < n; i++)
     {
         printf("%d ", arr[i]);
