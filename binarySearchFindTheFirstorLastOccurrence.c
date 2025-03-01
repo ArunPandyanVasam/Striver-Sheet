@@ -90,7 +90,7 @@ Pair firstOrLastOccurrence(int arr[], int n, int target)
 
     return result;
 }
-
+// We can use raw binary search also.
 int main(void)
 {
     printf("\n");
