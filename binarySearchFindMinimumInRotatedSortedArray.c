@@ -62,6 +62,12 @@ int findMinimum (int arr[], int n) {
     while (low <= high)
     {
         int mid = low+(high-low)/2;
+
+        if (arr[low] <= arr[high]) {
+            ans = minimum(ans, arr[low]);
+            break;
+        }
+
         if (arr[low] <= arr[mid]) {
             ans = minimum(ans, arr[low]);
             low = mid+1;
