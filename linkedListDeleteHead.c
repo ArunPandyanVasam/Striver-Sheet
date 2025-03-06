@@ -41,6 +41,16 @@ struct Node *convertArrayToLinkedList(int arr[], int size)
     return head;
 }
 
+struct Node *removeHead(struct Node *head)
+{
+    if (head == NULL)
+        return head;
+    struct Node *temp = head;
+    head = head->next;
+    free(temp);
+    return head;
+}
+
 void printLinkedList(struct Node *head)
 {
 
@@ -53,16 +63,15 @@ void printLinkedList(struct Node *head)
     printf("NULL\n");
 }
 
-void freeLinkedLIst(struct Node *head) {
-    struct Node* temp;
+void freeLinkedLIst(struct Node *head)
+{
+    struct Node *temp;
     while (head != NULL)
     {
         temp = head;
         head = head->next;
         free(temp);
     }
-    
-
 }
 
 int main(void)
@@ -72,6 +81,8 @@ int main(void)
     int arr[] = {12, 5, 7, 8};
     int size = sizeof(arr) / sizeof(arr[0]);
     struct Node *head = convertArrayToLinkedList(arr, size);
+
+    head = removeHead(head);
 
     // Print LinkedList
     printLinkedList(head);
