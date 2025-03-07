@@ -44,7 +44,7 @@ struct Node *convertArrayToLinkedList(int arr[], int size)
     return head;
 }
 
-struct Node* insertElement(struct Node* head, int value) {
+struct Node* insertElementAtHead(struct Node* head, int value) {
 
     struct Node* temp = createNode(value);
     temp->next = head;
@@ -91,7 +91,7 @@ int main(void)
     scanf("%d", &value);
 
     // Delete Node at Position
-    head = insertElement(head, value);
+    head = insertElementAtHead(head, value);
 
     // Print LinkedList
     printLinkedList(head);
