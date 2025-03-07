@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Structure
 struct Node
 {
     int data;
     struct Node *next;
 };
 
+// Create Node
 struct Node *createNode(int data)
 {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
@@ -22,6 +24,7 @@ struct Node *createNode(int data)
     return newNode;
 }
 
+// convert from Array To LinkedList
 struct Node *convertArrayToLinkedList(int arr[], int size)
 {
 
@@ -41,6 +44,7 @@ struct Node *convertArrayToLinkedList(int arr[], int size)
     return head;
 }
 
+// remove Head
 struct Node* removeHead(struct Node *head)
 {
     if (head == NULL)
@@ -51,6 +55,7 @@ struct Node* removeHead(struct Node *head)
     return head;
 }
 
+// remove Tail
 struct Node* removeTail (struct Node* head) {
     if (head == NULL || head->next == NULL) return NULL;
 
@@ -64,6 +69,7 @@ struct Node* removeTail (struct Node* head) {
     return head;
 }
 
+// print LinkedList
 void printLinkedList(struct Node *head)
 {
 
@@ -76,6 +82,7 @@ void printLinkedList(struct Node *head)
     printf("NULL\n");
 }
 
+// free LinkedList  
 void freeLinkedLIst(struct Node *head)
 {
     struct Node *temp;
@@ -95,6 +102,7 @@ int main(void)
     int size = sizeof(arr) / sizeof(arr[0]);
     struct Node *head = convertArrayToLinkedList(arr, size);
 
+    // remove LinkedList
     head = removeTail(head);
 
     // Print LinkedList
