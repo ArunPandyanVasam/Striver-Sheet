@@ -104,6 +104,34 @@ struct Node* insertValueAtGivenPosition(struct Node* head, int value, int positi
 
 }
 
+// insert value before a given number
+struct Node* insertValueBeforeGivenNumber(struct Node* head, int element, int value) {
+
+    if (head == NULL) {
+        return NULL;
+    } 
+
+    if (head->data == value) {
+        struct Node* newNode = createNode(element);
+        newNode->next = head;
+        return newNode;
+    }
+
+    struct Node* temp = head;
+    while (temp->next != NULL)
+    {
+        if (temp->next->data == value) {
+            struct Node* newNode = createNode(element);
+            newNode->next = temp->next;
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+
+}
+
 // print LinkedList
 void printLinkedList(struct Node *head)
 {
@@ -137,16 +165,17 @@ int main(void)
     int size = sizeof(arr) / sizeof(arr[0]);
     struct Node *head = convertArrayToLinkedList(arr, size);
 
+    int element = 0;
+    printf("Enter the element to insert: ");
+    scanf("%d", &element);
+
     int value = 0;
-    printf("Enter the value to insert: ");
+    printf("12 -> 5 -> 7 -> 8\n");
+    printf("Enter a value from list, where element has to insert before: ");
     scanf("%d", &value);
 
-    int position = 0;
-    printf("Enter the position to insert the value: ");
-    scanf("%d", &position);
-
     // Delete Node at Position
-    head = insertValueAtGivenPosition(head, value, position);
+    head = insertValueBeforeGivenNumber(head, element, value);
 
     // Print LinkedList
     printLinkedList(head);
