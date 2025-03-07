@@ -47,16 +47,17 @@ struct Node *convertArrayToLinkedList(int arr[], int size)
 //  insert value at head
 struct Node* insertElementAtHead(struct Node* head, int value) {
 
-    struct Node* temp = createNode(value);
-    temp->next = head;
-    return temp;
+    struct Node* newNode = createNode(value);
+    newNode->next = head;
+    return newNode;
 }
 
 //  insert value at tail
 struct Node* insertElementAtTail(struct Node* head, int value) {
 
     if (head == NULL) {
-        return createNode(value);
+        struct Node* newNode = createNode(value);
+        return newNode;
     }
     struct Node* temp = head;
     while (temp->next != NULL)
@@ -66,6 +67,41 @@ struct Node* insertElementAtTail(struct Node* head, int value) {
     struct Node* newNode = createNode(value);
     temp->next = newNode;
     return head;
+}
+
+// insert value at a given position;
+struct Node* insertValueAtGivenPosition(struct Node* head, int value, int position) {
+
+    if (head == NULL) {
+        if (position == 1) {
+            head = createNode(value);
+        } else {
+            printf("List is empty, so position should be 1");
+            return head;
+        }
+    } 
+
+    if (position == 1) {
+        struct Node* newNode = createNode(value);
+        newNode->next = head;
+        return newNode;
+    }
+
+    int ctr = 0; 
+    struct Node* temp = head;
+    while (temp != NULL)
+    {
+        ctr++;
+        if (ctr == (position-1)) {
+            struct Node* newNode = createNode(value);
+            newNode->next = temp->next;
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+
 }
 
 // print LinkedList
@@ -102,11 +138,15 @@ int main(void)
     struct Node *head = convertArrayToLinkedList(arr, size);
 
     int value = 0;
-    printf("Enter the value to insert at head of node: ");
+    printf("Enter the value to insert: ");
     scanf("%d", &value);
 
+    int position = 0;
+    printf("Enter the position to insert the value: ");
+    scanf("%d", &position);
+
     // Delete Node at Position
-    head = insertElementAtTail(head, value);
+    head = insertValueAtGivenPosition(head, value, position);
 
     // Print LinkedList
     printLinkedList(head);
