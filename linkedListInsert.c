@@ -44,6 +44,7 @@ struct Node *convertArrayToLinkedList(int arr[], int size)
     return head;
 }
 
+//  insert value at head
 struct Node* insertElementAtHead(struct Node* head, int value) {
 
     struct Node* temp = createNode(value);
@@ -51,7 +52,21 @@ struct Node* insertElementAtHead(struct Node* head, int value) {
     return temp;
 }
 
+//  insert value at tail
+struct Node* insertElementAtTail(struct Node* head, int value) {
 
+    if (head == NULL) {
+        return createNode(value);
+    }
+    struct Node* temp = head;
+    while (temp->next != NULL)
+    {
+       temp = temp->next;
+    }
+    struct Node* newNode = createNode(value);
+    temp->next = newNode;
+    return head;
+}
 
 // print LinkedList
 void printLinkedList(struct Node *head)
@@ -91,7 +106,7 @@ int main(void)
     scanf("%d", &value);
 
     // Delete Node at Position
-    head = insertElementAtHead(head, value);
+    head = insertElementAtTail(head, value);
 
     // Print LinkedList
     printLinkedList(head);
