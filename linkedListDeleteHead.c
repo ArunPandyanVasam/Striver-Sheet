@@ -55,6 +55,34 @@ struct Node* removeHead(struct Node *head)
     return head;
 }
 
+// remove Node at a position - including head, tail, position
+struct Node* removeNodeAtPosition(struct Node* head, int target) {
+
+    if (head == NULL) return head;
+    if (target == 1) {
+        struct Node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+
+    int ctr = 0; 
+    struct Node* current = head; 
+    struct Node* previous = NULL;
+    while (current != NULL)
+    {
+        ctr++;
+        if (ctr == target && previous != NULL) {
+            previous->next = previous->next->next;
+            free(current);
+            break;
+        }
+        previous = current;
+        current = current->next;   
+    }
+    return head;
+}
+
 // remove Tail
 struct Node* removeTail (struct Node* head) {
     if (head == NULL || head->next == NULL) return NULL;
@@ -102,8 +130,12 @@ int main(void)
     int size = sizeof(arr) / sizeof(arr[0]);
     struct Node *head = convertArrayToLinkedList(arr, size);
 
-    // remove LinkedList
-    head = removeTail(head);
+    int target = 0;
+    printf("Enter the position of Node to delete in a linked list: ");
+    scanf("%d", &target);
+
+    // Delete Node at Position
+    head = removeNodeAtPosition(head, target);
 
     // Print LinkedList
     printLinkedList(head);
