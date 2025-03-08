@@ -55,6 +55,16 @@ int lengthOfSingleLinkedList(struct Node *head) {
     return ctr;
 }
 
+int checkIfPresented(struct Node *head, int searchValue) {
+    struct Node *temp = head;
+    while (temp)
+    {
+        if (temp->data == searchValue) return 1;
+        temp = temp->next;
+    }
+    return 0;
+}
+
 // Function to print the linked list
 void printLinkedList(struct Node *head)
 {
@@ -87,6 +97,12 @@ int main(void)
     int size = sizeof(arr) / sizeof(arr[0]);
 
     struct Node *head = ConvertArrayToLinkedList(arr, size);
+
+    int searchValue = 0;
+    printf("Enter the value to search: ");
+    scanf("%d", &searchValue);
+
+    printf("(1 - Found | 0 - Not Found) -> %d\n", checkIfPresented(head, searchValue));
 
     printf("Length of LinkedList: %d\n", lengthOfSingleLinkedList(head));
 
