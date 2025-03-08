@@ -44,6 +44,17 @@ struct Node *ConvertArrayToLinkedList(int arr[], int size)
     return head;
 }
 
+int lengthOfSingleLinkedList(struct Node *head) {
+    int ctr = 0;
+    struct Node *temp = head;
+    while (temp)
+    {
+        ctr++;
+        temp = temp->next;
+    }
+    return ctr;
+}
+
 // Function to print the linked list
 void printLinkedList(struct Node *head)
 {
@@ -76,6 +87,8 @@ int main(void)
     int size = sizeof(arr) / sizeof(arr[0]);
 
     struct Node *head = ConvertArrayToLinkedList(arr, size);
+
+    printf("Length of LinkedList: %d\n", lengthOfSingleLinkedList(head));
 
     printf("Linked List: ");
     printLinkedList(head);
