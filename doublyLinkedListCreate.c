@@ -80,8 +80,8 @@ struct Node *deleteTailOfDoublyLinkedList(struct Node *head)
         tail = tail->next;
     }
 
-    struct Node* prev = tail->back;
-    prev->next = NULL;
+    struct Node* newTail = tail->back;
+    newTail->next = NULL;
     tail->back = NULL;
 
     free(tail);
