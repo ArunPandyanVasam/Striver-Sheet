@@ -47,6 +47,7 @@ struct Node *ConvertArrayToDoublyLinkedList(int arr[], int size)
     return head;
 }
 
+// delete head
 struct Node *deleteHeadOfDoublyLinkedList(struct Node *head)
 {
 
@@ -60,6 +61,31 @@ struct Node *deleteHeadOfDoublyLinkedList(struct Node *head)
     head->back = NULL;
     prev->next = NULL;
     free(prev);
+    return head;
+}
+
+// delete tail
+struct Node *deleteTailOfDoublyLinkedList(struct Node *head)
+{
+
+    if (head == NULL || head->next == NULL)
+    {
+        return NULL;
+    }
+
+    struct Node* tail = head;
+
+    while (tail->next != NULL)
+    {
+        tail = tail->next;
+    }
+
+    struct Node* prev = tail->back;
+    prev->next = NULL;
+    tail->back = NULL;
+
+    free(tail);
+
     return head;
 }
 
@@ -95,7 +121,7 @@ int main(void)
     int size = sizeof(arr) / sizeof(arr[0]);
 
     struct Node *head = ConvertArrayToDoublyLinkedList(arr, size);
-    head = deleteHeadOfDoublyLinkedList(head);
+    head = deleteTailOfDoublyLinkedList(head);
 
     printf("Linked List: ");
     printLinkedList(head);
