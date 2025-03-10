@@ -73,19 +73,68 @@ struct Node *deleteTailOfDoublyLinkedList(struct Node *head)
         return NULL;
     }
 
-    struct Node* tail = head;
+    struct Node *tail = head;
 
     while (tail->next != NULL)
     {
         tail = tail->next;
     }
 
-    struct Node* newTail = tail->back;
+    struct Node *newTail = tail->back;
     newTail->next = NULL;
     tail->back = NULL;
 
     free(tail);
 
+    return head;
+}
+
+struct Node *deleteKthElement(struct Node *head, int k)
+{
+    if (head == NULL)
+    {
+        return NULL;
+    }
+
+    int ctr = 0;
+    struct Node *kNode = head;
+    while (kNode != NULL)
+    {
+        ctr++;
+        if (ctr == k)
+            break;
+        kNode = kNode->next;
+    }
+
+    if (kNode == NULL)
+    {
+        printf("Invalid Position: %d\n", k);
+        return head;
+    }
+
+    struct Node *prev = kNode->back;
+    struct Node *front = kNode->next;
+
+    if (prev == NULL && front == NULL)
+    {
+        return NULL;
+    }
+    else if (prev == NULL)
+    {
+        return deleteHeadOfDoublyLinkedList(head);
+    }
+    else if (front == NULL)
+    {
+        return deleteTailOfDoublyLinkedList(head);
+    }
+
+    prev->next = front;
+    front->back = prev;
+
+    kNode->next = NULL;
+    kNode->back = NULL;
+
+    free(kNode);
     return head;
 }
 
@@ -120,8 +169,12 @@ int main(void)
     int arr[] = {2, 5, 8, 7};
     int size = sizeof(arr) / sizeof(arr[0]);
 
+    int k = 0;
+    printf("Enter position of Node to delete: ");
+    scanf("%d", &k);
+
     struct Node *head = ConvertArrayToDoublyLinkedList(arr, size);
-    head = deleteTailOfDoublyLinkedList(head);
+    head = deleteKthElement(head, k);
 
     printf("Linked List: ");
     printLinkedList(head);
