@@ -89,6 +89,7 @@ struct Node *deleteTailOfDoublyLinkedList(struct Node *head)
     return head;
 }
 
+// delete kth element
 struct Node *deleteKthElement(struct Node *head, int k)
 {
     if (head == NULL)
@@ -138,6 +139,54 @@ struct Node *deleteKthElement(struct Node *head, int k)
     return head;
 }
 
+// delete a given node
+struct Node *deleteNodeByValue(struct Node *head, int value)
+{
+    if (head == NULL)
+    {
+        return head;
+    }
+
+    struct Node *temp = head;
+
+    while (temp != NULL && temp->data != value)
+    {
+        temp = temp->next;
+    }
+
+    if (temp == NULL)
+    {
+        printf("value not found in the linkedlist!\n");
+        return head;
+    }
+
+    if (temp == head)
+    {
+        printf("Cannot delete the head node!\n");
+        return head;
+    }
+
+    struct Node *prev = temp->back;
+    struct Node *front = temp->next;
+
+    if (front == NULL)
+    {
+        prev->next = NULL;
+        temp->back = NULL;
+    }
+    else
+    {
+        prev->next = front;
+        front->back = prev;
+
+        temp->back = NULL;
+        temp->next = NULL;
+    }
+
+    free(temp);
+    return head;
+}
+
 // Function to print the linked list
 void printLinkedList(struct Node *head)
 {
@@ -169,14 +218,18 @@ int main(void)
     int arr[] = {2, 5, 8, 7};
     int size = sizeof(arr) / sizeof(arr[0]);
 
-    int k = 0;
-    printf("Enter position of Node to delete: ");
-    scanf("%d", &k);
-
     struct Node *head = ConvertArrayToDoublyLinkedList(arr, size);
-    head = deleteKthElement(head, k);
 
-    printf("Linked List: ");
+    printf("Initial Linked List: ");
+    printLinkedList(head);
+
+    int value;
+    printf("Enter value of Node to delete: ");
+    scanf("%d", &value);
+
+    head = deleteNodeByValue(head, value);
+
+    printf("Updated Linked List: ");
     printLinkedList(head);
 
     freeLinkedList(head);
