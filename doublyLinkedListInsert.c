@@ -85,6 +85,48 @@ struct Node *insertBeforeTail(struct Node *head, int value)
     return head;
 }
 
+// insert before Kth element
+struct Node* insertBeforeKthNode(struct Node* head, int value, int k) {
+
+    if (k <= 0) {
+        printf("Invalid value of k: %d\n", k);
+        return head;
+    }
+
+    if (k == 1) {
+        return insertBeforeHead(head, value);
+    }
+
+    struct Node* temp = head;
+    int ctr = 0;
+
+    while (temp != NULL) {
+        ctr++;
+        if (ctr == k) break;
+        temp = temp->next;
+    }
+
+    // If k is out of bounds
+    if (temp == NULL) {
+        printf("Invalid position: k = %d is greater than list length\n", k);
+        return head;
+    }
+
+    struct Node* prev =temp->back;
+    struct Node* newNode = createNode(value);
+    
+    newNode->back = prev;
+    newNode->next = temp;
+
+    if (prev != NULL) {
+        prev->next = newNode;
+    }
+    temp->back = newNode;
+
+    return head;
+
+}
+
 // Function to print the linked list
 void printLinkedList(struct Node *head)
 {
@@ -122,10 +164,14 @@ int main(void)
     printLinkedList(head);
 
     int value;
-    printf("Enter value to insert before head: ");
+    printf("Enter value: ");
     scanf("%d", &value);
 
-    head = insertBeforeTail(head, value);
+    int k;
+    printf("Enter value of k (1 to N): ");
+    scanf("%d", &k);
+
+    head = insertBeforeKthNode(head, value, k);
 
     printf("Updated Linked List: ");
     printLinkedList(head);
