@@ -86,44 +86,61 @@ struct Node *insertBeforeTail(struct Node *head, int value)
 }
 
 // insert before Kth element
-struct Node* insertBeforeKthNode(struct Node* head, int value, int k) {
+struct Node *insertBeforeKthNode(struct Node *head, int value, int k)
+{
 
-    if (k <= 0) {
+    if (k <= 0)
+    {
         printf("Invalid value of k: %d\n", k);
         return head;
     }
 
-    if (k == 1) {
+    if (k == 1)
+    {
         return insertBeforeHead(head, value);
     }
 
-    struct Node* temp = head;
+    struct Node *temp = head;
     int ctr = 0;
 
-    while (temp != NULL) {
+    while (temp != NULL)
+    {
         ctr++;
-        if (ctr == k) break;
+        if (ctr == k)
+            break;
         temp = temp->next;
     }
 
     // If k is out of bounds
-    if (temp == NULL) {
+    if (temp == NULL)
+    {
         printf("Invalid position: k = %d is greater than list length\n", k);
         return head;
     }
 
-    struct Node* prev =temp->back;
-    struct Node* newNode = createNode(value);
-    
+    struct Node *prev = temp->back;
+    struct Node *newNode = createNode(value);
+
     newNode->back = prev;
     newNode->next = temp;
-
 
     prev->next = newNode;
     temp->back = newNode;
 
     return head;
+}
 
+// insert before a given Node, I dont want to change the head.
+void insertBeforeNode(struct Node *node, int value)
+{
+    struct Node *prev = node->back;
+    struct Node *newNode = createNode(value);
+
+    newNode->back = prev;
+    newNode->next = node;
+
+    prev->next = newNode;
+    node->back = newNode;
 }
 
 // Function to print the linked list
@@ -162,15 +179,13 @@ int main(void)
     printf("Initial Linked List: ");
     printLinkedList(head);
 
-    int value;
-    printf("Enter value: ");
+    int value, beforeValue;
+    printf("Enter a value to insert: ");
     scanf("%d", &value);
+    printf("Enter the element before which to insert: ");
+    scanf("%d", &beforeValue);
 
-    int k;
-    printf("Enter value of k (1 to N): ");
-    scanf("%d", &k);
-
-    head = insertBeforeKthNode(head, value, k);
+    insertBeforeNode(head->next, value);
 
     printf("Updated Linked List: ");
     printLinkedList(head);
