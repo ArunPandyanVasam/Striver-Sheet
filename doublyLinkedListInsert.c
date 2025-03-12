@@ -118,9 +118,8 @@ struct Node* insertBeforeKthNode(struct Node* head, int value, int k) {
     newNode->back = prev;
     newNode->next = temp;
 
-    if (prev != NULL) {
-        prev->next = newNode;
-    }
+
+    prev->next = newNode;
     temp->back = newNode;
 
     return head;
