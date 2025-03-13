@@ -45,7 +45,7 @@ struct Node *ConvertArrayToDoublyLinkedList(int arr[], int size)
     return head;
 }
 
-// find middle node and return
+// find middle node and return [TC -> O(n/2) and SC -> O(1)]
 struct Node* findMiddleNode(struct Node* head) {
 
     struct Node* slow = head;
