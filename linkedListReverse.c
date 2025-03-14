@@ -92,7 +92,22 @@ struct Node *reverseLinkedList(struct Node *head)
 */
 
 
+// Iterative Approach
+struct Node* reverseLinkedListIterative(struct Node* head) {
 
+    struct Node* temp = head;
+    struct Node* prev = NULL;
+    struct Node* front = NULL;
+
+    while (temp != NULL)
+    {
+        front = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = front;
+    }
+    return prev;
+}
 
 
 // Function to print the linked list
