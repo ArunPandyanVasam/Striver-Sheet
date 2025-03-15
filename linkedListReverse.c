@@ -109,6 +109,18 @@ struct Node* reverseLinkedListIterative(struct Node* head) {
     return prev;
 }
 
+// Recursive Approach
+struct Node* reverseLinkedListRecursive(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+    struct Node* newHead = reverseLinkedListRecursive(head->next);
+    struct Node* front = head->next;
+    front->next = head;
+    head->next = NULL;
+
+    return newHead;
+}
 
 // Function to print the linked list
 void printLinkedList(struct Node *head)
@@ -147,7 +159,7 @@ int main(void)
     printLinkedList(head);
 
     // Reverse the linked list
-    head = reverseLinkedListIterative(head);
+    head = reverseLinkedListRecursive(head);
 
     // Print the reversed linked list
     printf("Reversed Linked List: ");
