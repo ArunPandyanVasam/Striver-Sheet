@@ -24,6 +24,7 @@ struct Node *createNode(int data)
 }
 
 // Function to reverse the linked list using a dynamic stack - BRUTE FORCE APPROACH
+// T.C -> O(2N), S.c -> O(N)
 struct Node *reverseLinkedList(struct Node *head)
 {
     if (!head)
@@ -93,6 +94,7 @@ struct Node *reverseLinkedList(struct Node *head)
 
 
 // Iterative Approach
+// T.C -> O(1), S.C -> O(1)
 struct Node* reverseLinkedListIterative(struct Node* head) {
 
     struct Node* temp = head;
@@ -110,6 +112,7 @@ struct Node* reverseLinkedListIterative(struct Node* head) {
 }
 
 // Recursive Approach
+// T.C -> O(N), S.C -> O(N)
 struct Node* reverseLinkedListRecursive(struct Node* head) {
     if (head == NULL || head->next == NULL) {
         return head;
