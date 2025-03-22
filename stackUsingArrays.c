@@ -44,16 +44,17 @@ void push(Stack *stack, int value)
 }
 
 // Function to pop an element from the stack
-int pop(Stack *stack) {
+int pop(Stack *stack)
+{
     // Check for stack underflow
     if (isEmpty(stack))
     {
-       printf("Stack Underflow\n");
-       return -1;
+        printf("Stack Underflow\n");
+        return -1;
     }
 
-    int popped = stack->arr[stack->top];    // Return the top element 
-    stack->top--; // decrement top pointer
+    int popped = stack->arr[stack->top]; // Return the top element
+    stack->top--;                        // decrement top pointer
     printf("Popped %d from the stack\n", popped);
     return popped; // return the popped element
 }
@@ -71,6 +72,12 @@ int peek(Stack *stack)
     return stack->arr[stack->top];
 }
 
+// Function to get the current size of the stack
+int size(Stack *stack)
+{
+    return stack->top + 1; // Number of elements in the stack
+}
+
 int main(void)
 {
 
@@ -83,15 +90,19 @@ int main(void)
     // Push elements onto the stack and print the stack after each push
     push(&stack, 3);
     printf("Top element: %d\n", peek(&stack));
+    printf("Stack size: %d\n", size(&stack));
 
     push(&stack, 5);
     printf("Top element: %d\n", peek(&stack));
+    printf("Stack size: %d\n", size(&stack));
 
     push(&stack, 2);
     printf("Top element: %d\n", peek(&stack));
+    printf("Stack size: %d\n", size(&stack));
 
     push(&stack, 8);
     printf("Top element: %d\n", peek(&stack));
+    printf("Stack size: %d\n", size(&stack));
 
     // Pop elements from the stack and print the stack after each pop
     while (!isEmpty(&stack))
@@ -99,7 +110,6 @@ int main(void)
         printf("Top element: %d\n", peek(&stack));
         printf("Popped element: %d\n", pop(&stack));
     }
-    
 
     return 0;
 }
