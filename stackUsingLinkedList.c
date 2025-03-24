@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -27,18 +26,26 @@ Node *createNode(int new_data)
 typedef struct Stack
 {
     Node *head; // Pointer to the top of the stack
+    int size;   // Size of the stack
 } Stack;
 
 // Function to initialize the stack
 void InitializeStack(Stack *stack)
 {
     stack->head = NULL; // Stack starts empty
+    stack->size = 0;    // Initialize size to 0
 }
 
 // Function to check if the stack is empty
 int isEmpty(Stack *stack)
 {
     return stack->head == NULL; // Returns 1 if empty, 0 otherwise
+}
+
+// Function to return the size of the stack
+int getSize(Stack *stack)
+{
+    return stack->size;
 }
 
 // Function to push an element onto the stack
@@ -59,6 +66,9 @@ void push(Stack *stack, int new_data)
 
     // Update the top to the new node
     stack->head = new_node;
+
+    // Increase the stack size
+    stack->size++;
 }
 
 // Function to remove the top element from the stack
@@ -79,6 +89,9 @@ void pop(Stack *stack)
 
     // Free the memory of the old top node
     free(temp);
+
+    // Decrease the stack size
+    stack->size--;
 }
 
 // Function to return the top element of the stack
@@ -88,7 +101,7 @@ int peek(Stack *stack)
     if (isEmpty(stack))
     {
         printf("\nStack is empty\n");
-        return -1; // Return INT_MIN as an error indicator
+        return -1; // Return -1 as an error indicator
     }
 
     return stack->head->data; // Return the top element
@@ -115,16 +128,18 @@ int main(void)
     push(&stack, 33);
     push(&stack, 44);
 
-    // Print top element of the stack
+    // Print top element and size of the stack
     printf("Top element is %d\n", peek(&stack));
+    printf("Stack size is %d\n", getSize(&stack));
 
     // Removing two elements from the top
     printf("Removing two elements: \n");
     pop(&stack);
     pop(&stack);
 
-    // Print top element of the stack after popping
+    // Print top element and size of the stack after popping
     printf("Top element is %d\n", peek(&stack));
+    printf("Stack size is %d\n", getSize(&stack));
 
     // Edge case: pop until the stack is empty
     pop(&stack);
@@ -134,7 +149,8 @@ int main(void)
     pop(&stack); // Should print "Stack Underflow"
 
     // Attempt to peek from an empty stack
-    printf("Top element is %d\n", peek(&stack)); // Should print "Stack is empty" and return INT_MIN
+    printf("Top element is %d\n", peek(&stack)); // Should print "Stack is empty"
+    printf("Stack size is %d\n", getSize(&stack)); // Should print 0
 
     // Free the stack memory before exiting
     freeStack(&stack);
