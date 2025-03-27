@@ -122,7 +122,7 @@ void freeQueue(Queue *q) {
     }
 }
 
-// Driver Code
+
 int main() {
     Stack s;
     initStack(&s);
