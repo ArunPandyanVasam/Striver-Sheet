@@ -3,45 +3,88 @@
 
 #define SIZE 10
 
-// Define a structure for each student in the hash table
 typedef struct Student
 {
     int roll;
     char name[100];
-    int isOccupied; // 0 = empty, 1 = filled
+    int isOccupied; // 0 = empty, 1 = filled, -1 = deleted (tombstone)
 } Student;
 
 Student table[SIZE];
 
-// Hash Function
 int hash(int roll)
 {
     return roll % SIZE;
 }
 
-// Insert Function with Linear Probing
+// Insert with linear probing
 void insert(int roll, char name[])
 {
     int index = hash(roll);
+    int originalIndex = index;
 
-    while (table[index].isOccupied)
+    while (table[index].isOccupied == 1)
     {
         index = (index + 1) % SIZE;
+        if (index == originalIndex)
+        {
+            printf("Hash table is full!\n");
+            return;
+        }
     }
 
     table[index].roll = roll;
     strcpy(table[index].name, name);
-    table[index].isOccupied = 1; // Mark the slot as occupied
+    table[index].isOccupied = 1;
 }
 
-// Display Function
+// Search by roll number
+int search(int roll)
+{
+    int index = hash(roll);
+    int startIndex = index;
+
+    while (table[index].isOccupied != 0)
+    {
+        if (table[index].isOccupied == 1 && table[index].roll == roll)
+        {
+            return index; // Found
+        }
+        index = (index + 1) % SIZE;
+        if (index == startIndex)
+            break; // full loop
+    }
+
+    return -1; // Not found
+}
+
+// Delete by roll number
+void delete(int roll)
+{
+    int index = search(roll);
+    if (index != -1)
+    {
+        table[index].isOccupied = -1; // Mark as deleted (tombstone)
+        printf("Roll %d deleted from index %d\n", roll, index);
+    }
+    else
+    {
+        printf("Roll %d not found. Cannot delete.\n", roll);
+    }
+}
+
+// Display table
 void display()
 {
     for (int i = 0; i < SIZE; i++)
     {
-        if (table[i].isOccupied)
+        if (table[i].isOccupied == 1)
         {
             printf("Index %d → Roll: %d, Name: %s\n", i, table[i].roll, table[i].name);
+        }
+        else if (table[i].isOccupied == -1)
+        {
+            printf("Index %d → Deleted\n", i);
         }
         else
         {
@@ -52,18 +95,28 @@ void display()
 
 int main(void)
 {
-    // Initialize table entries as empty
     for (int i = 0; i < SIZE; i++)
     {
         table[i].isOccupied = 0;
     }
 
-    // Test insertions
     insert(101, "Arun");
-    insert(111, "Vijay"); // Collision → goes to next
-    insert(121, "Meena"); // Collision again → next
+    insert(111, "Vijay");
+    insert(121, "Meena");
 
-    // Show the hash table
+    display();
+
+    printf("\nSearching for Roll 111...\n");
+    int pos = search(111);
+    if (pos != -1)
+        printf("Found at index %d\n", pos);
+    else
+        printf("Not found\n");
+
+    printf("\nDeleting Roll 111...\n");
+    delete (111);
+
+    printf("\nAfter deletion:\n");
     display();
 
     return 0;
