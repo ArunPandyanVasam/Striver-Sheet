@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /*
-Time Complexity: O(k)
+Time Complexity: O(k) <- O(2k) => dropped constant 2
 - First loop runs k times to calculate lSum.
 - Second loop runs k times to shift left and add right elements.
 
