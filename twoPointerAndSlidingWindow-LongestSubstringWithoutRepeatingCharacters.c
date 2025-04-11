@@ -17,31 +17,24 @@
         - So, space complexity = O(1) (constant space)
 */
 
-void maxLength_OptimalApproach(char *s, int n)
+void maxLength_BruteForce(char s[], int n)
 {
-    if (s == NULL || n <= 0)
-    {
-        printf("Max Length: 0\n");
-        return;
-    }
+    int maxLen = 0;
 
-    int l = 0, r = 0, len = 0, maxLen = 0;
-    int hash[MAX_CHAR];
-    for (int i = 0; i < MAX_CHAR; i++)
+    for (int i = 0; i < n; i++)
     {
-        hash[i] = -1;
-    }
-
-    while (r < n)
-    {
-        if (hash[s[r]] != -1 && hash[s[r]] >= l)
+        int hash[MAX_CHAR] = {0};
+        for (int j = i; j < n; j++)
         {
-            l = hash[s[r]] + 1;
+            if (hash[(unsigned char)s[j]] == 1) {
+                break;
+            }
+
+            hash[(unsigned char)s[j]] = 1;
+            int len = j - i + 1;
+            if (len > maxLen)
+                maxLen = len;
         }
-        len = r - l + 1;
-        maxLen = (len > maxLen) ? len : maxLen;
-        hash[s[r]] = r;
-        r++;
     }
 
     printf("Max Length: %d\n", maxLen);
@@ -67,17 +60,17 @@ void maxLength_OptimalApproach(char *s, int n)
 
     while (r < n)
     {
-        if (hash[s[r]] != -1)
+        if (hash[(unsigned char)s[r]] != -1)
         {
-            if (hash[s[r]] >= l)
+            if (hash[(unsigned char)s[r]] >= l)
             {
-                l = hash[s[r]] + 1;
+                l = hash[(unsigned char)s[r]] + 1;
             }
         }
 
         len = r - l + 1;
         maxLen = (len > maxLen) ? len : maxLen;
-        hash[s[r]] = r;
+        hash[(unsigned char)s[r]] = r;
         r = r + 1;
     }
     printf("Max Length: %d\n", maxLen);
