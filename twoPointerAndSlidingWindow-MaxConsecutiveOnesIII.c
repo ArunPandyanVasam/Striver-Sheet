@@ -38,7 +38,6 @@ void maxConsecutiveOnes_BruteForce(int arr[], int n, int k)
     printf("Max Length: %d\n", maxLen);
 }
 
-
 /*
 -----------------------------------------------------------
 Time Complexity: O(n)
@@ -81,6 +80,48 @@ void maxConsecutiveOnes_Better(int arr[], int n, int k)
     printf("Max Length: %d\n", maxLen);
 }
 
+/*
+    Finds the maximum length of a subarray with at most 'k' zeros flipped to 1s
+    using a Sliding Window (Two Pointer) approach.
+
+    Time Complexity:
+        O(n) - Each element is processed at most twice:
+              once when 'right' moves forward,
+              and at most once when 'left' moves forward.
+              So the overall time complexity is linear in the size of the array.
+
+    Space Complexity:
+        O(1) - Constant space is used. Only a few integer variables are maintained
+              regardless of the input size.
+*/
+void maxConsecutiveOnes_Optimal(int arr[], int n, int k)
+{
+    int maxLen = 0;
+    int left = 0;
+    int zeros = 0;
+
+    for (int right = 0; right < n; right++)
+    {
+
+        if (arr[right] == 0)
+            zeros++;
+
+        while (zeros > k)
+        {
+            if (arr[left] == 0)
+                zeros--;
+            left++;
+        }
+
+        int currentLen = right - left + 1;
+
+        if (currentLen > maxLen)
+            maxLen = currentLen;
+    }
+
+    printf("Max Length: %d\n", maxLen);
+}
+
 int main(void)
 {
     int arr[] = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0};
@@ -89,6 +130,7 @@ int main(void)
 
     maxConsecutiveOnes_BruteForce(arr, n, k);
     maxConsecutiveOnes_Better(arr, n, k);
+    maxConsecutiveOnes_Optimal(arr, n, k);
 
     return 0;
 }
