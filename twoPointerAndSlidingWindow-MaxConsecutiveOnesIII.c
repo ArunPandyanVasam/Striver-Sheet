@@ -58,23 +58,25 @@ Space Complexity: O(1)
 */
 void maxConsecutiveOnes_Better(int arr[], int n, int k)
 {
-    int maxLen = 0, l = 0, zeros = 0;
+    int maxLen = 0, left = 0, right = 0, zeroCount = 0;
 
-    for (int r = 0; r < n; r++)
+    while (right < n)
     {
-        if (arr[r] == 0)
-            zeros++;
+        if (arr[right] == 0)
+            zeroCount++;
 
-        while (zeros > k)
+        while (zeroCount > k)
         {
-            if (arr[l] == 0)
-                zeros--;
-            l++;
+            if (arr[left] == 0)
+                zeroCount--;
+            left++;
         }
 
-        int len = r - l + 1;
+        int len = right - left + 1;
         if (len > maxLen)
             maxLen = len;
+
+        right++;
     }
 
     printf("Max Length: %d\n", maxLen);
@@ -96,27 +98,31 @@ void maxConsecutiveOnes_Better(int arr[], int n, int k)
 */
 void maxConsecutiveOnes_Optimal(int arr[], int n, int k)
 {
-    int maxLen = 0;
-    int left = 0;
-    int zeros = 0;
+    int l = 0, r = 0, maxLen = 0, zeros = 0;
 
-    for (int right = 0; right < n; right++)
+    while (r < n)
     {
-
-        if (arr[right] == 0)
-            zeros++;
-
-        while (zeros > k)
+        if (arr[r] == 0)
         {
-            if (arr[left] == 0)
-                zeros--;
-            left++;
+            zeros++;
         }
 
-        int currentLen = right - left + 1;
+        if (zeros > k)
+        {
+            if (arr[l] == 0)
+            {
+                zeros--;
+            }
+            l++;
+        }
 
-        if (currentLen > maxLen)
-            maxLen = currentLen;
+        int len = r - l + 1;
+        if (len > maxLen)
+        {
+            maxLen = len;
+        }
+
+        r++;
     }
 
     printf("Max Length: %d\n", maxLen);
