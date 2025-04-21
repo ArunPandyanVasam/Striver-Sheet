@@ -15,7 +15,17 @@ int max(int a, int b) {
     return a > b ? a : b;
 }
 
-// Main logic: find max subarray with at most 2 distinct elements
+/*
+Time Complexity:
+- Outer loop runs n times.
+- Inner loop can run up to n times in the worst case.
+- Each isInSet call takes O(2) = O(1) time (since stSize <= 2).
+- Overall time complexity = O(n^2)
+
+Space Complexity:
+- Constant space used (array `st[2]` and a few integers)
+- So, space complexity = O(1)
+*/
 void fruitIntoBaskets_Brute(int arr[], int n) {
     int maxLen = 0;
 
