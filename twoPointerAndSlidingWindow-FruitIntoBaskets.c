@@ -16,7 +16,7 @@ int max(int a, int b) {
 }
 
 // Main logic: find max subarray with at most 2 distinct elements
-int maxSubarrayWithTwoDistinct(int arr[], int n) {
+void fruitIntoBaskets_Brute(int arr[], int n) {
     int maxLen = 0;
 
     for (int i = 0; i < n; i++) {
@@ -35,16 +35,14 @@ int maxSubarrayWithTwoDistinct(int arr[], int n) {
             maxLen = max(maxLen, j - i + 1);
         }
     }
-
-    return maxLen;
+    printf("Max subarray length with at most 2 distinct elements: %d\n", maxLen);
 }
 
 int main() {
     int arr[] = {1, 2, 1, 2, 3}; // Example input
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    int result = maxSubarrayWithTwoDistinct(arr, n);
-    printf("Max subarray length with at most 2 distinct elements: %d\n", result);
+    fruitIntoBaskets_Brute(arr, n);
 
     return 0;
 }
