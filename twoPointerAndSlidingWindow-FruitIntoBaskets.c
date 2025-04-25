@@ -48,6 +48,14 @@ void fruitIntoBaskets_Brute(int arr[], int n) {
     printf("Max subarray length with at most 2 distinct elements: %d\n", maxLen);
 }
 
+void fruitIntoBaskets_Optimal(int arr[], int n) {
+    int l = 0, r = 0, maxLen = 0;
+}
+
+
+
+
+
 int main() {
     int arr[] = {1, 2, 1, 2, 3}; // Example input
     int n = sizeof(arr) / sizeof(arr[0]);
