@@ -2,6 +2,11 @@
 #include <string.h>
 
 void longestRepeatingCharacterReplacement_Brute(char *str, int n) {
+    int maxLen = 0;
+    for (int i = 0; i < n; i++)
+    {
+        
+    }
     
 }
 
